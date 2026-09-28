@@ -30,3 +30,22 @@ python convert.py
 ```
 
 The script creates `Transfer YYYY-MM-DD Captrader.csv` in the `transfer_computershare_equateplus` directory.
+
+## Create a VVV staking report
+
+Copy `.env.example` to `.env` in the repository root and set `VVV_WALLET_ADDRESS` and `BLOCKSCOUT_API_KEY` there. `VVV_FROM_ADDRESS` is optional and can restrict rewards to a staking contract. When the script starts, enter the desired tax year or press Enter to use the current year. The `.env` file is ignored by Git. Run the script from the repository directory:
+
+```bat
+python vvv_staking_report/generate_report.py
+```
+
+The script creates `vvv_staking_report/vvv_staking_report_[JAHR].csv`. CoinGecko's free historical endpoint returns a price snapshot at 00:00 UTC for the selected date, not a guaranteed daily closing price. Review the source data and tax treatment with a qualified tax adviser before filing; this export is a calculation aid, not tax advice.
+
+## Run tests
+
+Install the development dependencies and run the offline unit tests from the repository directory:
+
+```bat
+python -m pip install -r requirements-dev.txt
+python -m pytest
+```
